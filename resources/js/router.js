@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ExampleComponent from './components/ExampleComponent'
+import Home from './views/Home'
+import Login from './views/Login'
+import Register from './views/Register'
 
 Vue.use(VueRouter)
 
@@ -8,7 +10,15 @@ export default new VueRouter({
     routes: [
         {
             path: '/laravue-test/public/',
-            component: ExampleComponent
+            component: Home
+        },
+        {
+            path: '/laravue-test/public/login',
+            component: Login
+        },
+        {
+            path: '/laravue-test/public/register',
+            component: Register
         }
     ],
     mode: 'history'

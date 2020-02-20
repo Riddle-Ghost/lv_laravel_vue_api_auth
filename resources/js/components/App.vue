@@ -2,7 +2,9 @@
     <div>
         <h1>Hello froa App.vue</h1>
 
-        <router-link to="/">Тест</router-link>
+        <router-link to="/laravue-test/public/">home</router-link>
+        <router-link to="/laravue-test/public/login">login</router-link>
+        <router-link to="/laravue-test/public/register">register</router-link>
         <router-view></router-view>
     </div>
 </template>
@@ -15,3 +17,7 @@
         }
     }
 </script>
+
+<style>
+@import "~bootstrap/dist/css/bootstrap.min.css";
+</style>
