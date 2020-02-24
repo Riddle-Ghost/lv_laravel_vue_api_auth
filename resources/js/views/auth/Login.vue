@@ -4,9 +4,11 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Login</div>
+                
+                <flash></flash>
 
                 <div class="card-body">
-                    <form @submit.prevent="loginSubmit">
+                    <form @submit.prevent="login">
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
@@ -65,6 +67,7 @@
 
 <script>
 import { required, minLength, email } from 'vuelidate/lib/validators'
+import Flash from '../../components/Flash'
 export default {
     data() {
         return {
@@ -84,11 +87,26 @@ export default {
         }
     },
     methods: {
-        loginSubmit() {
+        login() {
             if(!this.$v.$invalid) {
-                console.log(true, this.$v)
+                let data = {
+                    email: this.email,
+                    password: this.password,
+                    remember: this.remember
+                }
+                this.$store.dispatch('login', data)
+                .then(() => this.getUser() )
+                .catch(err => console.log(err))
             }
+        },
+        getUser() {
+            this.$store.dispatch('user')
+            .then(() => this.$router.push('/laravue-test/public'))
+            .catch(err => console.log(err))
         }
+    },
+    components: {
+        Flash
     }
 }
 </script>

@@ -24,6 +24,21 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+let expiresAt = localStorage.getItem('expires_at')
+let dateExp = new Date(expiresAt)
+let dateNow = new Date()
+
+if(dateExp < dateNow) {
+    localStorage.removeItem('expires_at')
+    localStorage.removeItem('token')
+}
+
+let apiToken = localStorage.getItem('token');
+
+if (apiToken) {
+    window.axios.defaults.headers.common['Authorization'] = "Bearer " + apiToken;
+}
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

@@ -6,7 +6,7 @@
                 <div class="card-header">Register</div>
 
                 <div class="card-body">
-                    <form @submit.prevent="registerSubmit">
+                    <form @submit.prevent="register">
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
@@ -84,6 +84,7 @@ export default {
             passConfirm: ''
         }
     },
+    
     validations: {
         name: {
             required,
@@ -102,9 +103,18 @@ export default {
         }
     },
     methods: {
-        registerSubmit() {
+        register() {
+
             if(!this.$v.$invalid) {
-                console.log(true, this.$v)
+
+                let data = {
+                    name: this.name,
+                    email: this.email,
+                    password: this.password
+                }
+                this.$store.dispatch('register', data)
+                .then(() => this.$router.push('/laravue-test/public/login') )
+                .catch(err => console.log(err))
             }
         }
     }

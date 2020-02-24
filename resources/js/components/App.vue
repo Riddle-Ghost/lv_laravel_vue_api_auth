@@ -1,13 +1,65 @@
 <template>
     <div>
-        <h1>Hello froa App.vue</h1>
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
 
-        <router-link to="/laravue-test/public/">home</router-link>
-        <router-link to="/laravue-test/public/login">login</router-link>
-        <router-link to="/laravue-test/public/register">register</router-link>
-        <router-link to="/laravue-test/public/verify">verify</router-link>
-        <router-link to="/laravue-test/public/reset">reset</router-link>
-        <router-link to="/laravue-test/public/email">email</router-link>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item">
+                            <router-link class="nav-link" to="/laravue-test/public/">home</router-link>
+                        </li>
+
+                        <li class="nav-item">
+                            <router-link class="nav-link" to="/laravue-test/public/verify">verify</router-link>
+                        </li>
+
+                        <li class="nav-item">
+                            <router-link class="nav-link" to="/laravue-test/public/reset">reset</router-link>
+                        </li>
+
+                        <li class="nav-item">
+                            <router-link class="nav-link" to="/laravue-test/public/email">email</router-link>
+                        </li>
+
+                        <template v-if="!isLoggedIn">
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/laravue-test/public/login">Login</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/laravue-test/public/register">Register</router-link>
+                            </li>
+                        </template>
+
+                        <b-nav tabs v-if="isLoggedIn">
+                            <b-nav-item-dropdown
+                                id="my-nav-dropdown"
+                                :text="userName"
+                                toggle-class="nav-link-custom"
+                                right
+                            >
+                                <b-dropdown-item @click="logout">Logout</b-dropdown-item>
+                                <b-dropdown-divider></b-dropdown-divider>
+                            </b-nav-item-dropdown>
+                        </b-nav>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <h1>Hello froa App.vue</h1>
 
         <router-view></router-view>
     </div>
@@ -15,13 +67,32 @@
 
 <script>
     export default {
+        computed: {
+            userName() {
+                return this.$store.getters.userName
+            },
+            isLoggedIn() {
+                return this.$store.getters.isLoggedIn
+            }
+        },
+        methods: {
+            logout() {
+                this.$store.dispatch('logout')
+                .then(() => {
+                this.$router.push('/laravue-test/public/login')
+                })
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
-            console.log(this.$route)
+            if (this.isLoggedIn) {
+
+                this.$store.dispatch('user')
+                .catch(err => console.log(err))
+            }
         }
     }
 </script>
 
 <style>
-@import "~bootstrap/dist/css/bootstrap.min.css";
+
 </style>
