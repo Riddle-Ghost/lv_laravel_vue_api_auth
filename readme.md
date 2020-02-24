@@ -1,3 +1,10 @@
+При работе использовались:
+
+- https://scotch.io/tutorials/handling-authentication-in-vue-using-vuex
+- https://webdevblog.ru/autentifikacii-v-vue-s-ispolzovaniem-vuex/
+
+- https://si-dev.com/ru/blog/rest-api-auth-with-laravel-passport
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">

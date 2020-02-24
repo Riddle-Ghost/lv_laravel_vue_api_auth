@@ -1993,6 +1993,17 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
+  created: function created() {
+    this.$http.interceptors.response.use(undefined, function (err) {
+      return new Promise(function (resolve, reject) {
+        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+          this.$store.dispatch("logout");
+        }
+
+        throw err;
+      });
+    });
+  },
   mounted: function mounted() {
     if (this.isLoggedIn) {
       this.$store.dispatch('user')["catch"](function (err) {
@@ -79247,6 +79258,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(bootstrap_vue__WEBPACK_IMPORTED_M
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$http = window.axios;
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   router: _router__WEBPACK_IMPORTED_MODULE_1__["default"],

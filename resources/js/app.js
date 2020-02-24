@@ -16,6 +16,8 @@ Vue.use(BootstrapVue)
 
 require('./bootstrap');
 
+Vue.prototype.$http = window.axios
+
 const app = new Vue({
     el: '#app',
     router,
