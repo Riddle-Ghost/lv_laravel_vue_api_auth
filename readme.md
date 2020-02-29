@@ -1,4 +1,4 @@
-# Laravel Vue API auth
+# Laravel Vue API auth (Bearer)
 
 <p align="center">В работе использовались</p>
 
