@@ -1,9 +1,10 @@
-#Laravel
+# Laravel Vue API auth
 
 <p align="center">В работе использовались</p>
 
 Laravel
 - laravel/passport
+
 Vue
 - Vuex
 - Vue Router
@@ -11,6 +12,10 @@ Vue
 - Bootstrap-vue
 - Axios
 
+Вью модули
+- Flash
+- Preloader
+---
 <p align="center">Порядок установки</p>
 
 
