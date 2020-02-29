@@ -1,7 +1,20 @@
+#Laravel
+
+<p align="center">В работе использовались</p>
+
+Laravel
+- laravel/passport
+Vue
+- Vuex
+- Vue Router
+- Vuelidate
+- Bootstrap-vue
+- Axios
+
 <p align="center">Порядок установки</p>
 
 
-<p align="center">При работе использовались:</p>
+<p align="center">Источники:</p>
 
 <p align="center">
 
