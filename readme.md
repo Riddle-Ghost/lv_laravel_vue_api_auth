@@ -18,6 +18,12 @@ Vue
 ---
 <p align="center">Порядок установки</p>
 
+- git clone https://github.com/Riddle-Ghost/laravel_vue_api_auth.git
+- composer install
+- .env (Настройки БД и почты)
+- config/frontend (Поправить url)
+- resources/js/components (Поправить url, если надо)
+- php artisan migrate
 
 <p align="center">Источники:</p>
 
