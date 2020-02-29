@@ -96,7 +96,7 @@ export default {
         },
         password: {
             required,
-            minLength: minLength(6)
+            minLength: minLength(8)
         },
         passConfirm: {
             sameAsPassword: sameAs('password')
@@ -113,7 +113,7 @@ export default {
                     password: this.password
                 }
                 this.$store.dispatch('register', data)
-                .then(() => this.$router.push('/laravue-test/public/login') )
+                .then(() => this.$router.push('/laravue-test/public/verify-email') )
                 .catch(err => console.log(err))
             }
         }

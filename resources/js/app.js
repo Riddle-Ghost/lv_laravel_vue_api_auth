@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import router from './router'
+import router from './router/'
 import App from './components/App'
 import Vuelidate from 'vuelidate'
 import BootstrapVue from 'bootstrap-vue'

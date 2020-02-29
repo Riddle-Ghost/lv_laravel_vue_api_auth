@@ -11,7 +11,7 @@
                     <form @submit.prevent="login">
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail</label>
                             <div class="col-md-6">
                                 <input type="email" class="form-control" autofocus
                                 :class="{'is-invalid': $v.email.$invalid && $v.email.$dirty}"
@@ -52,9 +52,16 @@
                                 <button type="submit" class="btn btn-primary">
                                     Login
                                 </button>
-                                <a class="btn btn-link" href="">
-                                    Forgot Your Password?
-                                </a>
+                                <router-link class="btn btn-link"
+                                to="/laravue-test/public/reset-password"
+                                >
+                                    Забыли пароль ?
+                                </router-link>
+                                <router-link class="btn btn-link"
+                                to="/laravue-test/public/verify-email"
+                                >
+                                    Не пришло письмо подтверждения ?
+                                </router-link>
                             </div>
                         </div>
                     </form>
@@ -96,7 +103,12 @@ export default {
                 }
                 this.$store.dispatch('login', data)
                 .then(() => this.getUser() )
-                .catch(err => console.log(err))
+                .catch(err => {
+                    console.log(err)
+                    if (err.response.status == 403) {
+                        this.$router.push('/laravue-test/public/verify-email')
+                    }
+                })
             }
         },
         getUser() {

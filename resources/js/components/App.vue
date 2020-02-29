@@ -19,19 +19,10 @@
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/laravue-test/public/">home</router-link>
+                            <router-link class="nav-link" to="/laravue-test/public/">Home</router-link>
                         </li>
-
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/laravue-test/public/verify">verify</router-link>
-                        </li>
-
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/laravue-test/public/reset">reset</router-link>
-                        </li>
-
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/laravue-test/public/email">email</router-link>
+                            <router-link class="nav-link" to="/laravue-test/public/protected">Protected</router-link>
                         </li>
 
                         <template v-if="!isLoggedIn">
@@ -59,48 +50,50 @@
             </div>
         </nav>
 
-        <h1>Hello froa App.vue</h1>
-
+        <h1>Hello from App.vue</h1>
+        <Preloader></Preloader>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
-    export default {
-        computed: {
-            userName() {
-                return this.$store.getters.userName
-            },
-            isLoggedIn() {
-                return this.$store.getters.isLoggedIn
-            }
+import Preloader from './Preloader'
+export default {
+    computed: {
+        userName() {
+            return this.$store.getters.userName
         },
-        methods: {
-            logout() {
-                this.$store.dispatch('logout')
-                .then(() => {
-                this.$router.push('/laravue-test/public/login')
-                })
-            }
-        },
-        created() {
-            this.$http.interceptors.response.use(undefined, function (err) {
-                return new Promise(function (resolve, reject) {
-                    if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-                        this.$store.dispatch("logout")
-                    }
-                    throw err
-                })
-            })
-        },
-        mounted() {
-            if (this.isLoggedIn) {
-
-                this.$store.dispatch('user')
-                .catch(err => console.log(err))
-            }
+        isLoggedIn() {
+            return this.$store.getters.isLoggedIn
         }
+    },
+    methods: {
+        logout() {
+            this.$store.dispatch('logout')
+            .then(() => {
+            this.$router.push('/laravue-test/public/login')
+            })
+        }
+    },
+    created() {
+        if (this.isLoggedIn) {
+
+            this.$store.dispatch('user')
+            .catch(err => console.log(err))
+        }
+        this.$http.interceptors.response.use(undefined, function (err) {
+            return new Promise(function (resolve, reject) {
+                if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+                    this.$store.dispatch("logout")
+                }
+                throw err
+            })
+        })
+    },
+    components: {
+        Preloader
     }
+}
 </script>
 
 <style>

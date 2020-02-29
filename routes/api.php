@@ -22,5 +22,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('register', 'RegisterController');
         Route::post('login', 'LoginController');
         Route::post('logout', 'LogoutController')->middleware('auth:api');
+        Route::post('email/resend', 'VerificationController@resend')->name('verification.resend');
+        Route::get('email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
+        Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail');
+        Route::post('password/reset', 'ResetPasswordController@reset')->name('password.reset');
+
     });
 });

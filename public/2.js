@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["Login"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Flash.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************!*\

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -21,22 +20,20 @@ class LoginController extends Controller
 
         if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'You cannot sign with those credentials',
+                'message' => 'Логин или пароль неверный',
                 'errors' => 'Unauthorised'
             ], 401);
         }
 
-        $token = Auth::user()->createToken(config('app.name'));
-        $token->token->expires_at = $request->remember_me ?
-            Carbon::now()->addMonth() :
-            Carbon::now()->addDay();
+        if (!Auth::user()->hasVerifiedEmail()) {
+            return response()->json([
+                'message' => 'Эмейл не подтвержден',
+                'errors' => 'Forbidden'
+            ], 403);
+        }
 
-        $token->token->save();
-        
-        return response()->json([
-            'token_type' => 'Bearer',
-            'token' => $token->accessToken,
-            'expires_at' => Carbon::parse($token->token->expires_at)->toDateTimeString(),
-        ], 200);
+        $response = $this->createToken(Auth::user(), $request->remember);
+
+        return $response;
     }
 }

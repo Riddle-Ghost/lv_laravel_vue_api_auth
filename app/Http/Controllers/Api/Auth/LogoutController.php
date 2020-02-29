@@ -17,8 +17,8 @@ class LogoutController extends Controller
     {
         
         $request->user()->token()->revoke();
-        // $request->user()->token()->delete();
-
+        
+        //Отозвать все токены юзера
         // $userTokens = $request->user()->tokens;
         // foreach($userTokens as $token) {
         //     $token->revoke();   
