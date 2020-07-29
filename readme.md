@@ -42,3 +42,4 @@ Vue
 - https://stackoverflow.com/questions/52362927/laravel-email-verification-5-7-using-rest-api
 
 </p>
+
